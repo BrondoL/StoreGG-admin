@@ -1,17 +1,36 @@
 var createError = require("http-errors");
 var express = require("express");
+var expressLayouts = require("express-ejs-layouts");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var methodOverride = require("method-override");
+var session = require("express-session");
+var flash = require("connect-flash");
 
+var dashboardRouter = require("./app/dashboard/router");
 var categoryRouter = require("./app/category/router");
+var nominalRouter = require("./app/nominal/router");
+var voucherRouter = require("./app/voucher/router");
 
 var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
+app.use(expressLayouts);
+app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 
+app.use(
+    session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: true,
+        cookie: { maxAge: 6000 },
+    })
+);
+app.use(flash());
+app.use(methodOverride("_method"));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,7 +41,10 @@ app.use(
     express.static(path.join(__dirname, "node_modules/admin-lte"))
 );
 
-app.use("/", categoryRouter);
+app.use("/", dashboardRouter);
+app.use("/category", categoryRouter);
+app.use("/nominal", nominalRouter);
+app.use("/voucher", voucherRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

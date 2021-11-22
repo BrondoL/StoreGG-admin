@@ -1,0 +1,29 @@
+<div class="table-responsive">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead class="text-center">
+            <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <% categories.forEach((category, i) => { %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= category.name %></td>
+                <td>
+                    <form action="/category/<%= category._id %>?_method=DELETE" method="POST">
+                        <a href="/category/<%= category._id %>/edit" class="btn btn-sm btn-info">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
