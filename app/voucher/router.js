@@ -13,6 +13,8 @@ const multer = require("multer");
 const os = require("os");
 
 /* GET home page. */
+const { isAdmin } = require("../middleware/auth");
+router.use(isAdmin);
 router.get("/", index);
 router.get("/create", create);
 router.post("/store", multer({ dest: os.tmpdir() }).single("image"), store);

@@ -11,7 +11,7 @@ module.exports = {
             res.render("admin/nominal/v_nominal", { nominals, alert });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },
@@ -20,7 +20,7 @@ module.exports = {
             res.render("admin/nominal/create");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },
@@ -36,7 +36,7 @@ module.exports = {
             res.redirect("/nominal");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },
@@ -47,7 +47,7 @@ module.exports = {
             res.render("admin/nominal/edit", { nominal });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },
@@ -66,7 +66,7 @@ module.exports = {
             res.redirect("/nominal");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },
@@ -79,7 +79,7 @@ module.exports = {
             res.redirect("/nominal");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/nominal");
         }
     },

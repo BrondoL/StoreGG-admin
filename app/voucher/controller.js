@@ -18,7 +18,7 @@ module.exports = {
             res.render("admin/voucher/v_voucher", { vouchers, alert });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -29,7 +29,7 @@ module.exports = {
             res.render("admin/voucher/create", { categories, nominals });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -66,7 +66,7 @@ module.exports = {
                         res.redirect("/voucher");
                     } catch (err) {
                         req.flash("alertMessage", `${err.message}`);
-                        req.flash("statusMessage", "danger");
+                        req.flash("alertStatus", "danger");
                         res.redirect("/voucher");
                     }
                 });
@@ -81,7 +81,7 @@ module.exports = {
             }
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -96,7 +96,7 @@ module.exports = {
             res.render("admin/voucher/edit", { voucher, categories, nominals });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -142,7 +142,7 @@ module.exports = {
                         res.redirect("/voucher");
                     } catch (err) {
                         req.flash("alertMessage", `${err.message}`);
-                        req.flash("statusMessage", "danger");
+                        req.flash("alertStatus", "danger");
                         res.redirect("/voucher");
                     }
                 });
@@ -158,7 +158,7 @@ module.exports = {
             }
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -175,7 +175,7 @@ module.exports = {
             res.redirect("/voucher");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },
@@ -191,7 +191,7 @@ module.exports = {
             res.redirect("/voucher");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/voucher");
         }
     },

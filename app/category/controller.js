@@ -10,7 +10,7 @@ module.exports = {
             res.render("admin/category/v_category", { categories, alert });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },
@@ -19,7 +19,7 @@ module.exports = {
             res.render("admin/category/create");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },
@@ -35,7 +35,7 @@ module.exports = {
             res.redirect("/category");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },
@@ -46,7 +46,7 @@ module.exports = {
             res.render("admin/category/edit", { category });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },
@@ -62,7 +62,7 @@ module.exports = {
             res.redirect("/category");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },
@@ -75,7 +75,7 @@ module.exports = {
             res.redirect("/category");
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
-            req.flash("statusMessage", "danger");
+            req.flash("alertStatus", "danger");
             res.redirect("/category");
         }
     },

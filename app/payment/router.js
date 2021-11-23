@@ -11,6 +11,8 @@ const {
 } = require("./controller");
 
 /* GET home page. */
+const { isAdmin } = require("../middleware/auth");
+router.use(isAdmin);
 router.get("/", index);
 router.get("/create", create);
 router.post("/store", store);
