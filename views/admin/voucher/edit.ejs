@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Nominal</h1>
+                    <h1>Voucher</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/nominal">Nominal</a></li>
+                        <li class="breadcrumb-item"><a href="/voucher">Voucher</a></li>
                         <li class="breadcrumb-item active">Ubah</li>
                     </ol>
                 </div>
@@ -27,35 +27,57 @@
                         <div class="card-body">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Ubah Nominal</h3>
+                                    <h3 class="card-title">Form Ubah Voucher</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form action="/nominal/<%= nominal._id %>?_method=PUT" method="POST">
+                                <form action="/voucher/<%= voucher._id %>?_method=PUT" method="POST"
+                                    enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Nama Koin</label>
-                                            <select class="form-control select2" style="width: 100%;" name="coinName">
-                                                <option selected="selected">Pilih Koin</option>
-                                                <option value="Gold" <% if(nominal.coinName === "Gold") { %> selected
-                                                    <% } %>> Gold
-                                                </option>
-                                                <option value="Diamond" <% if(nominal.coinName === "Diamond") { %>
-                                                    selected <% } %>>Diamond</option>
-                                                <option value="Jewel" <% if(nominal.coinName === "Jewel") { %> selected
-                                                    <% } %>>Jewel</option>
+                                            <label for="name">Nama Game</label>
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                value="<%= voucher.name %>" placeholder="Masukkan nama game" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kategori</label>
+                                            <select class="form-control select2" style="width: 100%;" name="category">
+                                                <option selected="selected">Pilih kategori</option>
+                                                <% categories.forEach(category => { %>
+                                                <option value="<%= category._id %>"
+                                                    <% if (category._id.toString() === voucher?.category._id?.toString()) { %>
+                                                    selected <% } %>><%= category.name %></option>
+                                                <% }) %>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="coinQuantity">Jumlah Koin</label>
-                                            <input type="number" class="form-control" name="coinQuantity"
-                                                value="<%= nominal.coinQuantity %>" id="coinQuantity"
-                                                placeholder="Masukkan jumlah koin" required>
+                                            <label>Nominal</label>
+                                            <div class="select2-purple">
+                                                <select class="form-control select2" multiple="multiple"
+                                                    style="width: 100%;" name="nominals"
+                                                    data-placeholder="Pilih nominal">
+                                                    <% nominals.forEach(nominal => { %>
+                                                    <option value="<%= nominal._id %>"
+                                                        <% voucher.nominals.forEach(vnominal => { %>
+                                                        <% if (nominal._id.toString() === vnominal._id.toString()) { %>
+                                                        selected <% } %> <% }) %>><%= nominal.coinName %> -
+                                                        <%= nominal.coinQuantity %></option>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="price">Harga</label>
-                                            <input type="number" class="form-control" name="price" id="price"
-                                                value="<%= nominal.price %>" placeholder="Masukkan harga" required>
+                                            <label for="image">Gambar</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="image" name="image"
+                                                        placeholder="Masukkan gambar">
+                                                    <label class="custom-file-label" for="image">Choose file</label>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <img src="http://localhost:3000/uploads/<%= voucher.thumbnail %>"
+                                                width="25%" height="25%" id="preview">
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -82,8 +104,28 @@
 <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <%- contentFor('myscript') %>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
     $('.select2').select2({
         theme: 'bootstrap4'
+    })
+
+    $(function () {
+        bsCustomFileInput.init();
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $("#preview").attr("src", e.target.result);
+                $("#preview").attr("width", "20%");
+                $("#preview").attr("height", "20%");
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    $("#image").change(function () {
+        readURL(this)
     })
 </script>

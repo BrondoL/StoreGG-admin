@@ -55,7 +55,7 @@
                                                     data-placeholder="Pilih nominal">
                                                     <% nominals.forEach(nominal => { %>
                                                     <option value="<%= nominal._id %>"><%= nominal.coinName %> -
-                                                        <%= nominal.price %></option>
+                                                        <%= nominal.coinQuantity %></option>
                                                     <% }) %>
                                                 </select>
                                             </div>
@@ -65,7 +65,7 @@
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="image" name="image"
-                                                        placeholder="Masukkan gambar" required>
+                                                        placeholder="Masukkan gambar">
                                                     <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
                                             </div>

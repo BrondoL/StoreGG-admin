@@ -3,44 +3,43 @@
         <thead class="text-center">
             <tr>
                 <th>No.</th>
-                <th>Nama Game</th>
-                <th>Kategori</th>
-                <th>Nominal</th>
+                <th>Tipe Pembayaran</th>
+                <th>Banks</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody class="text-center">
-            <% vouchers.forEach((voucher, i) => { %>
+            <% payments.forEach((payment, i) => { %>
             <tr>
                 <td><%= i + 1 %></td>
-                <td><%= voucher.name %></td>
-                <td><%= voucher?.category?.name ?? '-' %></td>
-                <td><% voucher.nominals.forEach(nominal => { %>
-                    <span class="badge badge-warning"><%= nominal.coinName %> - <%= nominal.coinQuantity %></span>
+                <td><%= payment.type %></td>
+                <td>
+                    <% payment.banks.forEach(bank => { %>
+                    <span class="badge badge-warning"><%= bank.bankName %> - <%= bank.noRekening %></span>
                     <% }) %>
                 </td>
                 <td>
-                    <% if (voucher.status === 'Y') { %>
+                    <% if (payment.status === 'Y') { %>
                     <span class="badge badge-success">Aktif</span>
                     <% } else { %>
                     <span class="badge badge-danger">Non Aktif</span>
                     <% } %>
                 </td>
                 <td>
-                    <form action="/voucher/status/<%= voucher._id %>?_method=PUT" method="POST"
+                    <form action="/payment/status/<%= payment._id %>?_method=PUT" method="POST"
                         style="display: inline-block;">
                         <button type="submit" class="btn btn-sm btn-primary">
-                            <i class="fas fa-folder"></i> <% if (voucher.status === 'Y') { %>
+                            <i class="fas fa-folder"></i> <% if (payment.status === 'Y') { %>
                             Non Aktifkan
                             <% } else { %>
                             Aktifkan
                             <% } %>
                         </button>
                     </form>
-                    <form action="/voucher/<%= voucher._id %>?_method=DELETE" method="POST"
+                    <form action="/payment/<%= payment._id %>?_method=DELETE" method="POST"
                         style="display: inline-block;">
-                        <a href="/voucher/<%= voucher._id %>/edit" class="btn btn-sm btn-info">
+                        <a href="/payment/<%= payment._id %>/edit" class="btn btn-sm btn-info">
                             <i class="fas fa-edit"></i> Edit
                         </a>
                         <button class="btn btn-sm btn-danger">
