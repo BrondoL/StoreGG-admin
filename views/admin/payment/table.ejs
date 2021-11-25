@@ -16,7 +16,7 @@
                 <td><%= payment.type %></td>
                 <td>
                     <% payment.banks.forEach(bank => { %>
-                    <span class="badge badge-warning"><%= bank.bankName %> - <%= bank.noRekening %></span>
+                    <span class="badge badge-warning"><%= bank.name %> - <%= bank.noRekening %></span>
                     <% }) %>
                 </td>
                 <td>

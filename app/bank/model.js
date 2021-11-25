@@ -4,15 +4,15 @@ let bankSchema = mongoose.Schema(
     {
         name: {
             type: String,
-            require: [true, "Nama Pemilik harus diisi"],
+            required: [true, "Nama Pemilik harus diisi"],
         },
         bankName: {
             type: String,
-            require: [true, "Nama Bank harus diisi"],
+            required: [true, "Nama Bank harus diisi"],
         },
         noRekening: {
             type: String,
-            require: [true, "Nomor Rekening Bank harus diisi"],
+            required: [true, "Nomor Rekening Bank harus diisi"],
         },
     },
     { timestamp: true }

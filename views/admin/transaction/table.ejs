@@ -1,0 +1,68 @@
+<div class="table-responsive">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead class="text-center">
+            <tr>
+                <th>No.</th>
+                <th>Nama Game</th>
+                <th>Item</th>
+                <th>Total Harga</th>
+                <th>Status</th>
+                <th>Nama Player</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <% transactions.forEach((transaction, i) => { %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <img src="http://localhost:3000/uploads/<%= transaction?.historyVoucherTopup?.thumbnail %>"
+                                alt="thumbnail" width="48px" height="48px">
+                        </li>
+                    </ul>
+                    <%= transaction?.historyVoucherTopup?.gameName %>
+                    <br>
+                    <%= transaction?.historyVoucherTopup?.category %>
+                </td>
+                <td>
+                    <%= transaction?.historyVoucherTopup?.coinQuantity %>
+                    <%= transaction?.historyVoucherTopup?.coinName %>
+                </td>
+                <td>
+                    <%= transaction?.value %>
+                </td>
+                <td>
+                    <% if (transaction.status === 'pending') { %>
+                    <span class="badge badge-warning"><%= transaction.status %></span>
+                    <% } else if(transaction.status === "failed") { %>
+                    <span class="badge badge-danger"><%= transaction.status %></span>
+                    <% } else { %>
+                    <span class="badge badge-success"><%= transaction.status %></span>
+                    <% } %>
+                </td>
+                <td><%= transaction?.player?.name ?? '' %></td>
+                <% if (transaction.status === 'pending') { %>
+                <td>
+                    <form action="/transaction/status/<%= transaction._id %>?_method=PUT&status=success" method="POST"
+                        style="display: inline-block;">
+                        <button class="btn btn-sm btn-info">
+                            <i class="fas fa-check-circle"></i> Terima
+                        </button>
+                    </form>
+                    <form action="/transaction/status/<%= transaction._id %>?_method=PUT&status=failed" method="POST"
+                        style="display: inline-block;">
+                        <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-times-circle"></i> Tolak
+                        </button>
+                    </form>
+                </td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

@@ -4,19 +4,19 @@ let userSchema = mongoose.Schema(
     {
         email: {
             type: String,
-            require: [true, "Email harus diisi"],
+            required: [true, "Email harus diisi"],
         },
         name: {
             type: String,
-            require: [true, "Nama harus diisi"],
+            required: [true, "Nama harus diisi"],
         },
         password: {
             type: String,
-            require: [true, "Password harus diisi"],
+            required: [true, "Password harus diisi"],
         },
         phoneNumber: {
             type: String,
-            require: [true, "Nomor HP harus diisi"],
+            required: [true, "Nomor HP harus diisi"],
         },
         role: {
             type: String,

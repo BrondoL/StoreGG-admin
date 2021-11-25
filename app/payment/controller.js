@@ -9,7 +9,12 @@ module.exports = {
             const alert = { message: alertMessage, status: alertStatus };
 
             const payments = await Payment.find().populate("banks");
-            res.render("admin/payment/v_payment", { payments, alert });
+            res.render("admin/payment/v_payment", {
+                payments,
+                alert,
+                name: req.session.user.name,
+                title: "StoreGG | Payments",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -19,7 +24,11 @@ module.exports = {
     create: async (req, res) => {
         try {
             const banks = await Bank.find();
-            res.render("admin/payment/create", { banks });
+            res.render("admin/payment/create", {
+                banks,
+                name: req.session.user.name,
+                title: "StoreGG | Form Tambah Payment",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -49,7 +58,12 @@ module.exports = {
                 "banks"
             );
             const banks = await Bank.find();
-            res.render("admin/payment/edit", { payment, banks });
+            res.render("admin/payment/edit", {
+                payment,
+                banks,
+                name: req.session.user.name,
+                title: "StoreGG | Form Ubah Payment",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");

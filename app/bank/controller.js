@@ -8,7 +8,12 @@ module.exports = {
             const alert = { message: alertMessage, status: alertStatus };
 
             const banks = await Bank.find();
-            res.render("admin/bank/v_bank", { banks, alert });
+            res.render("admin/bank/v_bank", {
+                banks,
+                alert,
+                name: req.session.user.name,
+                title: "StoreGG | Banks",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -17,7 +22,10 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            res.render("admin/bank/create");
+            res.render("admin/bank/create", {
+                name: req.session.user.name,
+                title: "StoreGG | Form Tambah Bank",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -44,7 +52,11 @@ module.exports = {
         try {
             const { id } = req.params;
             const bank = await Bank.findOne({ _id: id });
-            res.render("admin/bank/edit", { bank });
+            res.render("admin/bank/edit", {
+                bank,
+                name: req.session.user.name,
+                title: "StoreGG | Form Ubah Bank",
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");

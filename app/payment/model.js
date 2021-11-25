@@ -4,7 +4,7 @@ let paymentSchema = mongoose.Schema(
     {
         type: {
             type: String,
-            require: [true, "Tipe pembayaran harus diisi"],
+            required: [true, "Tipe pembayaran harus diisi"],
         },
         status: {
             type: String,

@@ -15,8 +15,12 @@ var voucherRouter = require("./app/voucher/router");
 var bankRouter = require("./app/bank/router");
 var paymentRouter = require("./app/payment/router");
 var userRouter = require("./app/user/router");
+var transactionRouter = require("./app/transaction/router");
+var playerRouter = require("./app/player/router");
+var authRouter = require("./app/auth/router");
 
 var app = express();
+const URL = `/api/v1`;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -29,7 +33,7 @@ app.use(
         secret: "keyboard cat",
         resave: false,
         saveUninitialized: true,
-        cookie: { maxAge: 6000 },
+        cookie: { maxAge: 20 * 60 * 1000 },
     })
 );
 app.use(flash());
@@ -51,6 +55,10 @@ app.use("/nominal", nominalRouter);
 app.use("/voucher", voucherRouter);
 app.use("/bank", bankRouter);
 app.use("/payment", paymentRouter);
+app.use("/transaction", transactionRouter);
+
+app.use(`${URL}/players`, playerRouter);
+app.use(`${URL}/auth`, authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
