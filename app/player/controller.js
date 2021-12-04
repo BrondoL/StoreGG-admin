@@ -31,12 +31,14 @@ module.exports = {
                 .populate("nominals")
                 .populate("user", "_id name phoneNumber");
 
+            const payments = await Payment.find().populate("banks");
+
             if (!voucher) {
                 return res.status(404).json({
                     message: "Voucher game tidak ditemukan.!",
                 });
             }
-            return res.status(200).json({ data: voucher });
+            return res.status(200).json({ data: voucher, payments });
         } catch (err) {
             return res.status(500).json({
                 message: err.message || "Internal server error",
